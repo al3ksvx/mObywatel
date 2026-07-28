@@ -1,0 +1,445 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;" data-allow-browser=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#121212">
+    <title>sObywatel 4.0</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/services.css" as="style">
+    <link rel="preload" href="assets/fonts/roboto_500_latin.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/services.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <style>
+      /* 1. DOMYŚLNY MOTYW (JASNY) */
+      :root {
+        --search-bg: #EFEFF4;
+        --search-text: #000000;
+        --search-icon: #8E8E93;
+        --link-color: #007AFF;
+      }
+
+      /* 2. CIEMNY MOTYW (Wymuszony wyłącznie przez Twój skrypt theme.js) */
+      /* Złapie klasy z tagu <html> oraz <body> */
+      html[data-theme="dark"],
+      html.dark-theme,
+      html.dark-mode,
+      body[data-theme="dark"],
+      body.dark-theme,
+      body.dark-mode {
+        --search-bg: #24262b;
+        --search-text: #FFFFFF;
+        --link-color: #4da1ff;
+      }
+
+      /* 3. Pasek wyszukiwania */
+      .services-page .search-bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--search-bg);
+        border-radius: 12px;
+        padding: 10px 16px;
+        margin-top: 16px;
+        margin-bottom: 8px;
+        cursor: text;
+        transition: background-color 0.3s ease;
+      }
+
+      .services-page .search-bar .search-icon {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 24px;
+        height: 24px;
+        margin: 0 !important;
+        flex-shrink: 0;
+        fill: var(--search-icon);
+        pointer-events: none;
+        transition: fill 0.3s ease;
+      }
+
+      .services-page .search-bar input {
+        flex: 1 1 auto;
+        min-width: 0;
+        border: none !important;
+        background-color: transparent !important;
+        font-size: 16px;
+        font-family: inherit;
+        color: var(--search-text) !important;
+        width: auto;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0;
+        pointer-events: auto;
+        -webkit-user-select: text;
+        user-select: text;
+        transition: color 0.3s ease;
+      }
+      
+      .search-bar input::placeholder {
+        color: var(--search-icon);
+        transition: color 0.3s ease;
+      }
+      
+      .customize-link-top {
+        text-align: right;
+        margin-bottom: 24px;
+        margin-top: 8px;
+      }
+      
+      .customize-link-top a {
+        color: var(--link-color);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+    </style>
+
+    <script src="js/guard.js" defer=""></script>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/header.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/pages/services.js" defer=""></script>
+  <style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style><meta name="color-scheme" content="light dark"></head>
+
+  <body class="services-page loaded">
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    <header class="app-header">
+      <div class="header-left">
+        <div id="inicjaly1">
+          <img src="assets/icons/coi_common_ui_ic_mobywatel_logo.svg" alt="mObywatel">
+        </div>
+        <span id="header-title" class="header-title">Usługi</span>
+      </div>
+      <div class="header-right"></div>
+    </header>
+
+    <div class="page-container">
+      <div class="page-main">
+        <h1 id="main-title" class="page-title">Usługi</h1>
+        
+        <label class="search-bar" for="services-search-input">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" aria-hidden="true">
+            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"></path>
+          </svg>
+          <input id="services-search-input" type="text" placeholder="Szukaj" autocomplete="off" enterkeyhint="search" inputmode="search" aria-label="Szukaj usług">
+        </label>
+
+        <div class="customize-link-top">
+          <a href="#">Dostosuj widok</a>
+        </div>
+
+        <p class="category-title">Ochrona danych</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'zastrzez.html'">
+            <div class="card__left">
+              <img src="assets/icons/ic029_zastrzez_dokument.svg" alt="Zastrzeż dokument" width="25" height="25">
+              <p>Zastrzeż dokument</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'incydent.html'">
+            <div class="card__left">
+              <img src="assets/icons/bezpiecznie_w_sieci.svg" alt="Bezpiecznie w sieci" width="25" height="25">
+              <p>Bezpiecznie w sieci</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'sprawdz_dowod.html'">
+            <div class="card__left">
+              <img src="assets/icons/sprawdz_dowod.svg" alt="Sprawdź dowód" width="25" height="25">
+              <p>Sprawdź dowód</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'pesel.html'">
+            <div class="card__left">
+              <img src="assets/icons/zastrzez_pesel.svg" alt="Zastrzeż PESEL" width="25" height="25">
+              <p>Zastrzeż PESEL</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'sprawdz_pesel.html'">
+            <div class="card__left">
+              <img src="assets/icons/sprawdz_pesel.svg" alt="Sprawdź PESEL" width="25" height="25">
+              <p>Sprawdź PESEL</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+
+        <p class="category-title">Bezpieczeństwo</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/szkolenia_obronne.svg" alt="Szkolenia obronne" width="25" height="25" loading="lazy">
+              <p>Szkolenia obronne</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/ic043_poradnik_bezpieczenstwa.svg" alt="Poradnik bezpieczeństwa" width="25" height="25" loading="lazy">
+              <p>Poradnik bezpieczeństwa</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+        </div>
+
+        <p class="category-title">Zdrowie</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/recepty.svg" alt="Recepty" width="25" height="25" loading="lazy">
+              <p>Recepty</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/mojeikp.svg" alt="mojeIKP" width="25" height="25" loading="lazy">
+              <p>mojeIKP</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+        </div>
+
+        <p class="category-title">Sprawy urzędowe</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/ic032_podpis_kwalfikowany.svg" alt="Podpis kwalifikowany" width="25" height="25" loading="lazy">
+              <p>Podpis kwalifikowany</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/zalatw_sprawe.svg" alt="Załatw sprawę" width="25" height="25" loading="lazy">
+              <p>Załatw sprawę</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/twoje_sprawy.svg" alt="Twoje Sprawy" width="25" height="25" loading="lazy">
+              <p>Twoje Sprawy</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/odbior_dowodu.svg" alt="Odbiór dowodu" width="25" height="25" loading="lazy">
+              <p>Odbiór dowodu</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/ewizyta_w_zus.svg" alt="Ewizyta w ZUS" width="25" height="25" loading="lazy">
+              <p>E-wizyta w ZUS</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/wybory.svg" alt="Wybory" width="25" height="25" loading="lazy">
+              <p>Wybory</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/podpisz_dokument.svg" alt="Podpis osobisty" width="25" height="25" loading="lazy">
+              <p>Podpis osobisty</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+        </div>
+
+        <p class="category-title">Kierowca i pojazdy</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/mstluczka.svg" alt="mStłuczka" width="25" height="25" loading="lazy">
+              <p>mStłuczka</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/punkty_karne.svg" alt="Punkty karne" width="25" height="25" loading="lazy">
+              <p>Punkty karne</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/uprawnienia_kierowcy.svg" alt="Uprawnienia kierowcy" width="25" height="25" loading="lazy">
+              <p>Uprawnienia kierowcy</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/historia_pojazdu.svg" alt="Historia pojazdu" width="25" height="25" loading="lazy">
+              <p>Historia pojazdu</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+        </div>
+
+        <p class="category-title">Opłaty i podatki</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/eplatnosci.svg" alt="ePłatności" width="25" height="25" loading="lazy">
+              <p>ePłatności</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/mandaty.svg" alt="Mandaty" width="25" height="25" loading="lazy">
+              <p>Mandaty</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24" loading="lazy">
+          </div>
+        </div>
+
+        <p class="category-title">Przedsiębiorca</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/firma.svg" alt="Firma" width="25" height="25">
+              <p>Firma</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+
+        <p class="category-title">Środowisko</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/naruszenie_srodowiskowe.svg" alt="Naruszenie Środowiskowe" width="25" height="25">
+              <p>Naruszenie środowiskowe</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/jakosc_powietrza.svg" alt="Jakość powietrza" width="25" height="25">
+              <p>Jakość powietrza</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/alert_powodziowy.svg" alt="Alert powodziowy" width="25" height="25">
+              <p>Alert powodziowy</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+
+        <p class="category-title">Podróż</p>
+        <div class="card-list">
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/bezpieczny_autobus.svg" alt="Bezpieczny autobus" width="25" height="25">
+              <p>Bezpieczny autobus</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/bilkom.svg" alt="Bilkom" width="25" height="25">
+              <p>Bilkom</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/karta_mka.svg" alt="Karta MKA" width="25" height="25">
+              <p>Karta MKA</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+          <div class="separator"></div>
+          <div class="card" onclick="window.location.href = 'services.html'">
+            <div class="card__left">
+              <img src="assets/icons/polak_za_granica.svg" alt="Polak za granicą" width="25" height="25">
+              <p>Polak za granicą</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+      <p id="services-search-empty" class="services-search-empty" hidden="">Brak wyników wyszukiwania.</p></div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'documents.html'">
+        <img src="assets/icons/if001_documents.svg" alt="home">
+        <span>Dokumenty</span>
+      </div>
+      <div class="bottom-nav__tab bottom-nav__tab--active">
+        <img src="assets/icons/if007_services_fill.svg" alt="services">
+        <span class="bottom-nav__active-text">Usługi</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'qr.html'">
+        <img src="assets/icons/if004_scan.svg" alt="qr">
+        <span>Kod QR</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'search.html'">
+        <img src="assets/icons/ab023_zoom_in.svg" alt="search">
+        <span>Szukaj</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'more.html'">
+        <img src="assets/icons/if005_more.svg" alt="more">
+        <span>Więcej</span>
+      </div>
+    </div>
+  
+</body></html>

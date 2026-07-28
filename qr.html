@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;" data-allow-browser=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>sObywatel 4.0</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/qr.css" as="style">
+    <link rel="preload" href="css/overlay-camera.css" as="style">
+    <link rel="preload" href="assets/orzel/godlo%20back.png" as="image" type="image/png">
+    <link rel="preload" href="assets/orzel/godlo%20top.png" as="image" type="image/png">
+    <link rel="preload" href="assets/fonts/roboto_500_latin.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/qr.css">
+    <link rel="stylesheet" href="css/overlay-camera.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <script src="js/guard.js"></script><style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/header.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/qrcode.min.js"></script>
+    <script src="js/pages/qr.js" defer=""></script>
+
+    <style>
+      /* Dodany wymuszony styl na sam przycisk - przebija wszystko */
+      #enter-code {
+        position: relative !important;
+        z-index: 9999999 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+
+      .modal-overlay-code {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999999 !important; /* Wymuszamy bycie na absolutnym wierzchu */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .modal-overlay-code.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .modal-content-code {
+        background-color: #fff;
+        width: 85%;
+        max-width: 350px;
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        color: #333;
+        position: relative;
+        z-index: 1000000;
+      }
+      .modal-content-code h2 {
+        margin: 0 0 15px;
+        font-size: 1.25rem;
+        color: #1a1a1a;
+      }
+      .modal-content-code input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+      .modal-content-code input:focus {
+        outline: none;
+        border-color: #0052a5;
+      }
+      .modal-buttons-code {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .modal-buttons-code button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .btn-cancel-code {
+        background-color: #e0e0e0;
+        color: #333;
+      }
+      .btn-submit-code {
+        background-color: #0052a5;
+        color: #fff;
+      }
+    </style>
+  <meta name="color-scheme" content="light dark"><meta name="theme-color" content="#121212"></head>
+
+  <body class="qr-page loaded">
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    <header class="app-header">
+      <div class="header-left">
+        <div id="inicjaly1">
+          <img src="assets/icons/coi_common_ui_ic_mobywatel_logo.svg" alt="mObywatel">
+        </div>
+        <span id="header-title" class="header-title" style="font-weight: bold">Kod QR</span>
+      </div>
+      <div class="header-right"></div>
+    </header>
+    <div class="page-container">
+      <section id="qr-code-container" class="camera-section" style="display: none">
+        <header class="app-header dowod-header">
+          <div class="header-left">
+            <a href="#" class="back-link" onclick="
+                closeShowQr();
+                return false;
+              ">
+              <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wróć">
+            </a>
+            <span id="overlay-header-title" class="header-title">Pokaż kod QR</span>
+          </div>
+          <div class="header-right"></div>
+        </header>
+        <div class="qr-overlay-content">
+          <h1 id="overlay-main-title" class="qr-page-title">Pokaż kod QR</h1>
+          <p class="qr-hint">
+            Poproś osobę, której sprawdzasz dokument,<br>
+            aby zeskanowała lub przepisała ten kod w<br>swojej aplikacji
+            mObywatel.
+          </p>
+          <div class="qr-display-frame">
+            <div class="qr-display">
+              <img id="qr-image" class="qr-image" alt="Kod QR">
+              <div id="qr-code-number" class="qr-code-number font-numeric"></div>
+              <div class="qr-timer">
+                <div class="qr-timer-text">
+                  <span class="qr-timer-label">Kod wygaśnie za:</span>
+                  <span id="qr-timer-value" class="qr-timer-value">3 min 0 sek</span>
+                </div>
+                <div class="qr-timer-bar">
+                  <span id="qr-timer-bar-fill" class="qr-timer-bar-fill"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="qr-display-frame">
+            <div class="qr-icons">
+              <img src="assets/icons/flaga_polski_b.webp" alt="Flaga Polski" class="qr-icon">
+              <div class="qr-icon-wrapper">
+                <div class="base-back" style="display: block; opacity: 1;"></div>
+                <div class="holo-back" style="opacity: 0.7; background-position: center 50%;"></div>
+                <div class="holo-grain"></div>
+                <div class="godlo-top" style="display: block; opacity: 1;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="camera-container" class="camera-section" style="display: none">
+        <header class="app-header dowod-header">
+          <div class="header-left">
+            <a href="#" class="back-link" onclick="
+                closeCamera();
+                return false;
+              ">
+              <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wróć">
+            </a>
+            <span class="header-title fade-in">Zeskanuj kod QR</span>
+          </div>
+          <img class="help-icon" src="assets/dowod/znakzapytania.svg" alt="Pomoc">
+        </header>
+        <div class="camera-overlay-content">
+          <p class="camera-hint">Umieść kod QR w ramce, aby go zeskanować.</p>
+          <div class="camera-frame">
+            <div class="camera-viewport">
+              <video id="camera-view" class="camera-video" autoplay="" playsinline=""></video>
+              <img src="assets/icons/ic_scan_qr_frame.svg" alt="" class="qr-frame-overlay qr-frame-light">
+              <img src="assets/icons/ic_scan_qr_frame_dark.svg" alt="" class="qr-frame-overlay qr-frame-dark">
+            </div>
+          </div>
+          <button type="button" id="enter-code" class="camera-cta" onpointerdown="window.otworzOknoKodu(event)">
+            Wpisz kod
+          </button>
+        </div>
+      </section>
+      <h1 class="page-title">Kod QR</h1>
+      <p class="page-subtitle">Dzięki tej funkcji zalogujesz się do usług w</p>
+      <p class="page-subtitle">internecie i potwierdzisz cyfrowe dokumenty</p>
+      <p class="page-subtitle">- zarówno swoje, jak i drugiej osoby.</p>
+
+      <div id="scan-qr-button" class="card">
+        <div class="card__left">
+          <img src="assets/icons/ai002_confirm_identity.svg" alt="ID" width="30" height="30">
+          <div class="card__text">
+            <p class="card__title">Zeskanuj kod QR</p>
+            <p class="card__subtitle">Zaloguj się do strony internetowej</p>
+            <p class="card__subtitle">lub potwierdź swój cyfrowy</p>
+            <p class="card__subtitle">dokument.</p>
+          </div>
+        </div>
+        <img src="assets/icons/ic_arrow_forward_Dgray.svg" alt="arrow" width="17" height="17">
+      </div>
+
+      <div id="show-qr-button" class="card">
+        <div class="card__left">
+          <img src="assets/icons/ai003_check_document.svg" alt="ID" width="30" height="30">
+          <div class="card__text">
+            <p class="card__title">Pokaż kod QR</p>
+            <p class="card__subtitle">
+              Sprawdź cyfrowy dokument drugiej osoby.
+            </p>
+          </div>
+        </div>
+        <img src="assets/icons/ic_arrow_forward_Dgray.svg" alt="arrow" width="17px" height="17">
+      </div>
+
+      <div id="podpis_kwalifikowany" class="card">
+        <div class="card__left">
+          <img src="assets/icons/g007_sign_the_document.svg" alt="ID" width="30" height="30">
+          <div class="card__text">
+            <p class="card__title" style="line-height: 1.5">
+              Zeskanuj kod QR do podpisu<br>kwalifikowanego
+            </p>
+            <p class="card__subtitle">
+              Wybierz, gdy chcesz użyć kodu ze<br>strony dostawcy podpisu.
+            </p>
+          </div>
+        </div>
+        <img src="assets/icons/ic_arrow_forward_Dgray.svg" alt="arrow" width="17" height="17">
+      </div>
+
+      <div class="bottom-nav">
+        <div class="bottom-nav__tab unfill" onclick="window.location.href = 'documents.html'">
+          <img src="assets/icons/if001_documents.svg" alt="home">
+          <span>Dokumenty</span>
+        </div>
+        <div class="bottom-nav__tab unfill" onclick="window.location.href = 'services.html'">
+          <img src="assets/icons/if002_services.svg" alt="services">
+          <span>Usługi</span>
+        </div>
+        <div class="bottom-nav__tab bottom-nav__tab--active">
+          <img src="assets/icons/if009_scan_fill.svg" alt="qr">
+          <span class="bottom-nav__active-text">Kod QR</span>
+        </div>
+        <div class="bottom-nav__tab unfill" onclick="window.location.href = 'search.html'">
+          <img src="assets/icons/ab023_zoom_in.svg" alt="search">
+          <span>Szukaj</span>
+        </div>
+        <div class="bottom-nav__tab unfill" onclick="window.location.href = 'more.html'">
+          <img src="assets/icons/if005_more.svg" alt="more">
+          <span>Więcej</span>
+        </div>
+      </div>
+    </div>
+    
+    <div id="code-modal" class="modal-overlay-code">
+      <div class="modal-content-code">
+        <h2>Wprowadź kod</h2>
+        <input type="text" id="manual-code-input" placeholder="Wpisz kod..." autocomplete="off">
+        <div class="modal-buttons-code">
+          <button type="button" id="cancel-code-btn" class="btn-cancel-code">Anuluj</button>
+          <button type="button" id="submit-code-btn" class="btn-submit-code">Zatwierdź</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.otworzOknoKodu = function(e) {
+        if(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        const codeModal = document.getElementById("code-modal");
+        const codeInput = document.getElementById("manual-code-input");
+        
+        if(codeModal) {
+          codeModal.classList.add("active");
+          codeInput.value = ""; 
+          
+          setTimeout(function() {
+            codeInput.focus();
+          }, 50);
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", function() {
+        const cancelBtn = document.getElementById("cancel-code-btn");
+        const submitBtn = document.getElementById("submit-code-btn");
+        const codeModal = document.getElementById("code-modal");
+        const enterCodeBtn = document.getElementById("enter-code");
+
+        // Agresywne zapięcie nasłuchiwania na przycisk
+        if(enterCodeBtn) {
+          enterCodeBtn.addEventListener("click", window.otworzOknoKodu, true);
+          enterCodeBtn.addEventListener("touchstart", window.otworzOknoKodu, { passive: false, capture: true });
+        }
+
+        // Ukrywanie okienka
+        cancelBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          codeModal.classList.remove("active");
+        });
+
+        // Zatwierdzanie - wyrzucenie błędu
+        submitBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          alert("Błędny kod ! Spróbuj ponownie !");
+        });
+      });
+    </script>
+
+    <script src="js/orzel.js"></script>
+  
+</body></html>

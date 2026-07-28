@@ -1,0 +1,570 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;" data-allow-browser=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>sObywatel 4.0</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/more.css" as="style">
+    <link rel="preload" href="assets/fonts/roboto_500_latin.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/more.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/overlay-camera.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <script src="js/guard.js" defer=""></script>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/header.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/pages/more.js" defer=""></script>
+  <style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#121212"></head>
+  <body class="loaded">
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    <header class="app-header">
+      <div class="header-left">
+        <div id="inicjaly1">
+          <img src="assets/icons/coi_common_ui_ic_mobywatel_logo.svg" alt="mObywatel">
+        </div>
+        <span id="header-title" class="header-title">Więcej</span>
+      </div>
+      <div class="header-right"></div>
+    </header>
+    <div class="bottom-nav">
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'documents.html'">
+        <img src="assets/icons/if001_documents.svg" alt="home">
+        <span>Dokumenty</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'services.html'">
+        <img src="assets/icons/if002_services.svg" alt="services">
+        <span>Usługi</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'qr.html'">
+        <img src="assets/icons/if004_scan.svg" alt="qr">
+        <span>Kod QR</span>
+      </div>
+      <div class="bottom-nav__tab unfill" onclick="window.location.href = 'search.html'">
+        <img src="assets/icons/ab023_zoom_in.svg" alt="search">
+        <span>Szukaj</span>
+      </div>
+      <div class="bottom-nav__tab bottom-nav__tab--active">
+        <img src="assets/icons/if010_more_fill.svg" alt="more">
+        <span class="bottom-nav__active-text">Więcej</span>
+      </div>
+    </div>
+
+    <main class="page-main">
+      <h1 id="main-title" class="page-title">Więcej</h1>
+      <p class="category-title">Twoje Dane</p>
+
+      <div class="card-list">
+        <div class="clickable-card" style="text-decoration: none; color: inherit">
+          <div class="card">
+            <div class="card__left">
+              <img src="assets/icons/aa033_address_book.svg" alt="Dane kontaktowe" width="25" height="25">
+              <p>Dane kontaktowe</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="clickable-card" style="text-decoration: none; color: inherit">
+          <div class="card">
+            <div class="card__left">
+              <img src="assets/icons/ag009_home_pin.svg" alt="Dane zameldowania" width="25" height="25">
+              <p>Dane zameldowania</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="clickable-card" style="text-decoration: none; color: inherit">
+          <div class="card card--passport" id="passportCard" style="cursor: pointer;">
+            <div class="card__left">
+              <img src="assets/icons/ad002_selected_person.svg" alt="Dane paszportu" width="25" height="25">
+              <p>Dane paszportu</p>
+            </div>
+            <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+          </div>
+        </div>
+      </div>
+
+      <p class="category-title">Ustawienia</p>
+      <div class="card-list">
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/aa008_change_password.svg" alt="Zmień hasło" width="25" height="25">
+            <p>Zmień hasło</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/aa009_fingerprint.svg" alt="Logowanie biometryczne" width="25" height="25">
+            <p>Logowanie biometryczne</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card" id="notifSettingsCard" role="link" tabindex="0" style="cursor: pointer;">
+          <div class="card__left">
+            <img src="assets/icons/ab013_notifications.svg" alt="Powiadomienia" width="25" height="25">
+            <p>Powiadomienia</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card" tabindex="0" role="button" style="cursor: pointer;">
+          <div class="card__left">
+            <img src="assets/icons/aa073_mode.svg" alt="wygląd" width="25" height="25">
+            <p>Wygląd</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/ag005_globe.svg" alt="Język aplikacji" width="25" height="25">
+            <p>Język aplikacji</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/ae001_published_certificate.svg" alt="Wydane certyfikaty" width="25" height="25">
+            <p>Wydane certyfikaty</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+      </div>
+
+      <p class="category-title">Pozostałe</p>
+      <div class="card-list">
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/aa016_history.svg" alt="Historia aktywności" width="25" height="25">
+            <p>Historia aktywności</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card" id="aboutAppCard" style="cursor: pointer;">
+          <div class="card__left">
+            <img src="assets/icons/c1_info.svg" alt="O aplikacji" width="25" height="25">
+            <p>O aplikacji</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/ab015_help.svg" alt="Pomoc techniczna" width="25" height="25">
+            <p>Pomoc techniczna</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card" onclick="showSwResetModal()" style="cursor: pointer;">
+          <div class="card__left">
+            <img src="assets/icons/aa025_star.svg" alt="Oceń aplikację" width="25" height="25">
+            <p>Oceń aplikację</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card">
+          <div class="card__left">
+            <img src="assets/icons/af005_idea.svg" alt="Zagłosuj na pomysł" width="25" height="25">
+            <p>Zagłosuj na pomysł</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+        <div class="separator"></div>
+        <div class="card" id="deactivateAppCard" style="cursor: pointer;">
+          <div class="card__left">
+            <img src="assets/icons/aa028_deactivate.svg" alt="Dezaktywuj aplikację" width="25" height="25">
+            <p>Dezaktywuj aplikację</p>
+          </div>
+          <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+        </div>
+      </div>
+
+      <div class="card-list" style="margin-top: 0em; margin-bottom: 0em">
+        <div class="card" onclick="window.location.href = 'login.html'">
+          <div class="card__left">
+            <img src="assets/icons/ab019_logout.svg" alt="Wyloguj się" width="25" height="25">
+            <p class="logout-text">Wyloguj się</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section id="themeOverlay" class="camera-section" hidden="" aria-modal="true" role="dialog" aria-labelledby="themeSheetTitle">
+      <header class="app-header dowod-header">
+        <div class="header-left">
+          <a href="#" class="back-link" onclick="
+              try {
+                closeThemeOverlay();
+              } catch (_) {
+                try {
+                  document
+                    .getElementById('themeOverlay')
+                    .setAttribute('hidden', '');
+                  document.body.classList.remove('camera-open');
+                  document.body.classList.remove('no-scroll');
+                } catch (_) {}
+              }
+              return false;
+            ">
+            <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wstecz">
+          </a>
+          <span class="header-title fade-in" id="themeSheetTitle">Wygląd</span>
+        </div>
+      </header>
+      <div class="camera-overlay-content">
+        <h2 class="category-title">Kolorystyka</h2>
+        <div class="card-list" style="padding: 20px 24px">
+          <div class="card" data-theme="light">
+            <div class="card__left">
+              <input type="radio" name="theme-mode" value="light">
+              <span>Tryb jasny</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="card" data-theme="dark">
+            <div class="card__left">
+              <input type="radio" name="theme-mode" value="dark">
+              <span>Tryb ciemny</span>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="card" data-theme="auto">
+            <div class="card__left">
+              <input type="radio" name="theme-mode" value="auto">
+              <div>
+                <span>Używaj ustawień urządzenia</span>
+                <p class="muted-desc" style="margin-top: 3px">
+                  Tryby jasny i ciemny będą się włączać<br>zgodnie z
+                  ustawieniami urządzenia.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="deactivateConfirmModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(2px);">
+      <div style="background: var(--bg-color, #1e1e1e); padding: 24px; border-radius: 12px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+        <h3 style="margin: 0 0 12px 0; font-size: 18px; color: var(--text-color, #ffffff);">Dezaktywacja</h3>
+        <p style="margin: 0 0 24px 0; font-size: 14px; color: var(--text-muted, #aaaaaa); line-height: 1.4;">Czy na pewno chcesz dezaktywować aplikację? Wszystkie dane zostaną bezpowrotnie usunięte.</p>
+        <div style="display: flex; gap: 12px;">
+          <button onclick="closeDeactivateConfirm()" style="flex: 1; padding: 12px; border: 1px solid var(--text-muted, #555555); background: transparent; border-radius: 8px; cursor: pointer; color: var(--text-color, #ffffff); font-weight: 500;">Anuluj</button>
+          <button onclick="executeDeactivation()" style="flex: 1; padding: 12px; border: none; background: #e53935; color: white; border-radius: 8px; cursor: pointer; font-weight: bold;">Usuń</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="customAlertModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10001; justify-content: center; align-items: center; backdrop-filter: blur(2px);">
+      <div style="background: var(--bg-color, #1e1e1e); padding: 24px; border-radius: 12px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+        <h3 id="customAlertTitle" style="margin: 0 0 12px 0; font-size: 18px; color: var(--text-color, #ffffff);">Komunikat</h3>
+        <p id="customAlertMessage" style="margin: 0 0 24px 0; font-size: 14px; color: var(--text-muted, #aaaaaa); line-height: 1.4;"></p>
+        <button onclick="closeCustomAlert()" style="width: 100%; padding: 12px; border: none; background: #007aff; color: white; border-radius: 8px; cursor: pointer; font-weight: bold;">OK</button>
+      </div>
+    </div>
+
+    <div id="swResetModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; justify-content: center; align-items: center;">
+      <div style="background: var(--bg-color, #1e1e1e); padding: 24px; border-radius: 12px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+        <h3 style="margin: 0 0 12px 0; font-size: 18px; color: var(--text-color, #ffffff);">mObywatel 4.7</h3>
+        <p style="margin: 0 0 24px 0; font-size: 14px; color: var(--text-muted, #aaaaaa); line-height: 1.4;">Czy na pewno chcesz ręcznie zaktualizować aplikację do najnowszej wersji ?</p>
+        <div style="display: flex; gap: 12px;">
+          <button onclick="closeSwResetModal()" style="flex: 1; padding: 12px; border: 1px solid var(--text-muted, #555555); background: transparent; border-radius: 8px; cursor: pointer; color: var(--text-color, #ffffff); font-weight: 500;">Anuluj</button>
+          <button onclick="executeSwReset()" style="flex: 1; padding: 12px; border: none; background: #e53935; color: white; border-radius: 8px; cursor: pointer; font-weight: bold;">Aktualizuj</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="licenseModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
+      <div style="background: #1c1c1e; padding: 24px; border-radius: 16px; width: 90%; max-width: 400px; color: white; box-shadow: 0 12px 40px rgba(0,0,0,0.6); max-height: 85vh; overflow-y: auto;">
+        
+        <h2 style="margin: 0 0 20px 0; font-size: 18px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;">Informacje diagnostyczne</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+          <div>
+            <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">Klucz licencyjny</span>
+            <p id="licenseKeyDisplay" style="margin: 4px 0 0 0; font-family: monospace; font-size: 14px; color: #ff453a;"></p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">Data aktywacji</span>
+              <p id="activationDateDisplay" style="margin: 4px 0 0 0; font-size: 13px;"></p>
+            </div>
+            <div>
+              <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">VPN/Proxy</span>
+              <p id="vpnDisplay" style="margin: 4px 0 0 0; font-size: 13px; color: #30d158;"></p>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid #333; width: 100%;">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">IP Aktywacji</span>
+              <p id="ipActivationDisplay" style="margin: 4px 0 0 0; font-family: monospace; font-size: 13px; color: #aeaeb2;"></p>
+            </div>
+            <div>
+              <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">IP Aktualne</span>
+              <p id="ipCurrentDisplay" style="margin: 4px 0 0 0; font-family: monospace; font-size: 13px;"></p>
+            </div>
+          </div>
+
+          <div>
+            <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">ASN &amp; Provider (Aktualny)</span>
+            <p id="asnDisplay" style="margin: 4px 0 0 0; font-size: 13px;"></p>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid #333; width: 100%;">
+
+          <div>
+            <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">ID Urządzenia</span>
+            <p id="deviceIdDisplay" style="margin: 4px 0 0 0; font-family: monospace; font-size: 12px; word-break: break-all;"></p>
+          </div>
+
+          <div>
+            <span style="color: #8e8e93; font-size: 12px; text-transform: uppercase;">Specyfikacja sprzętowa</span>
+            <div id="deviceParamsDisplay" style="margin: 4px 0 0 0; font-size: 11px; color: #aeaeb2; line-height: 1.4;"></div>
+          </div>
+        </div>
+
+        <button onclick="closeLicenseModal()" style="width: 100%; padding: 14px; border: none; background: #007aff; color: white; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 15px;">Zamknij</button>
+      </div>
+    </div>
+
+    <script>
+      // ==========================================
+      // LOGIKA UNIWERSALNEGO MODALU KOMUNIKATÓW
+      // ==========================================
+      let customAlertCallback = null;
+
+      function showCustomAlert(title, message, callback = null) {
+        document.getElementById('customAlertTitle').innerText = title;
+        document.getElementById('customAlertMessage').innerText = message;
+        document.getElementById('customAlertModal').style.display = 'flex';
+        customAlertCallback = callback;
+      }
+
+      function closeCustomAlert() {
+        document.getElementById('customAlertModal').style.display = 'none';
+        if (customAlertCallback) {
+          customAlertCallback();
+          customAlertCallback = null; // Resetujemy po wykonaniu
+        }
+      }
+
+      // ==========================================
+      // LOGIKA RESETU SERVICE WORKERA
+      // ==========================================
+      function showSwResetModal() {
+        document.getElementById('swResetModalOverlay').style.display = 'flex';
+      }
+
+      function closeSwResetModal() {
+        document.getElementById('swResetModalOverlay').style.display = 'none';
+      }
+
+      async function executeSwReset() {
+        closeSwResetModal(); // Najpierw zamykamy okienko potwierdzenia
+        let hasChanges = false;
+        
+        if ('serviceWorker' in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const registration of registrations) {
+            await registration.unregister();
+            hasChanges = true;
+          }
+        }
+
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          for (const cacheName of cacheNames) {
+            await caches.delete(cacheName);
+            hasChanges = true;
+          }
+        }
+
+        // Używamy naszego nowego modalu zamiast domyślnego alert()
+        if (hasChanges) {
+          showCustomAlert("Aktualizacja", "Poprawnie wykonano aktualizację! Zamknij całkowicie aplikację, a następnie uruchom ją ponownie.", () => {
+            window.location.reload(true);
+          });
+        } else {
+          showCustomAlert("Błąd", "Błąd aktualizacji! Skontaktuj się z administratorem.", () => {
+            window.location.reload(true);
+          });
+        }
+      }
+
+      // ==========================================
+      // LOGIKA MODALU LICENCJI / DIAGNOSTYKI
+      // ==========================================
+      function closeLicenseModal() {
+        document.getElementById('licenseModalOverlay').style.display = 'none';
+      }
+
+      const aboutAppCard = document.getElementById('aboutAppCard');
+      let aboutClickCount = 0;
+      let aboutClickTimer;
+
+      if (aboutAppCard) {
+        aboutAppCard.addEventListener('click', async () => {
+          aboutClickCount++;
+          
+          clearTimeout(aboutClickTimer);
+          aboutClickTimer = setTimeout(() => {
+            aboutClickCount = 0;
+          }, 1000); 
+
+          if (aboutClickCount === 3) {
+            aboutClickCount = 0;
+            clearTimeout(aboutClickTimer);
+            
+            document.getElementById('licenseKeyDisplay').innerText = localStorage.getItem('moj_tajny_klucz') || 'Brak klucza';
+            document.getElementById('activationDateDisplay').innerText = localStorage.getItem('data_aktywacji') || 'Brak danych';
+            document.getElementById('deviceIdDisplay').innerText = localStorage.getItem('device-id') || 'Brak ID';
+            
+            const savedIp = localStorage.getItem('net_ip') || 'Brak danych';
+            document.getElementById('ipActivationDisplay').innerText = savedIp;
+            
+            const specs = `
+              System/Arch: ${navigator.platform}<br>
+              Ekran: ${window.screen.width}x${window.screen.height} (${window.devicePixelRatio}x)<br>
+              Rdzenie CPU: ${navigator.hardwareConcurrency || 'N/A'}<br>
+              Pamięć RAM: ${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'N/A'}<br>
+              Przeglądarka: ${navigator.vendor || 'N/A'}<br>
+              User-Agent: ${navigator.userAgent}
+            `;
+            document.getElementById('deviceParamsDisplay').innerHTML = specs;
+
+            document.getElementById('ipCurrentDisplay').innerText = 'Pobieranie...';
+            document.getElementById('ipCurrentDisplay').style.color = '#ffffff';
+            document.getElementById('asnDisplay').innerText = 'Pobieranie...';
+            document.getElementById('vpnDisplay').innerText = 'Sprawdzanie...';
+            
+            document.getElementById('licenseModalOverlay').style.display = 'flex';
+
+            try {
+              let currentIp = "Błąd";
+              
+              const ipResponse = await fetch('https://api.ipify.org?format=json');
+              const ipData = await ipResponse.json();
+              currentIp = ipData.ip;
+              document.getElementById('ipCurrentDisplay').innerText = currentIp;
+
+              if (currentIp !== savedIp && savedIp !== 'Brak danych') {
+                 document.getElementById('ipCurrentDisplay').style.color = '#ff9f0a';
+              } else {
+                 document.getElementById('ipCurrentDisplay').style.color = '#30d158';
+              }
+
+              const detailsResponse = await fetch(`https://ipapi.co/${currentIp}/json/`);
+              const detailsData = await detailsResponse.json();
+
+              if (!detailsData.error) {
+                const asn = detailsData.asn || '';
+                const org = detailsData.org || '';
+                document.getElementById('asnDisplay').innerText = `${asn} ${org}`.trim();
+                
+                document.getElementById('vpnDisplay').innerText = 'Nieznany ';
+                document.getElementById('vpnDisplay').style.color = '#aeaeb2';
+              } else {
+                 document.getElementById('asnDisplay').innerText = 'Brak danych o dostawcy';
+              }
+
+            } catch (e) {
+              console.error("Wystąpił błąd podczas pobierania sieci:", e);
+              document.getElementById('ipCurrentDisplay').innerText = 'Blokada CORS / AdBlock';
+              document.getElementById('ipCurrentDisplay').style.color = '#ff453a';
+              document.getElementById('asnDisplay').innerText = 'Błąd połączenia';
+              document.getElementById('vpnDisplay').innerText = 'Błąd';
+            }
+          }
+        });
+      }
+
+      // ==========================================
+      // LOGIKA DEZAKTYWACJI APLIKACJI
+      // ==========================================
+      const deactivateAppCard = document.getElementById('deactivateAppCard');
+
+      if (deactivateAppCard) {
+        deactivateAppCard.addEventListener('click', () => {
+          // Zamiast systemowego confirm() używamy naszego modalu
+          document.getElementById('deactivateConfirmModal').style.display = 'flex';
+        });
+      }
+
+      function closeDeactivateConfirm() {
+        document.getElementById('deactivateConfirmModal').style.display = 'none';
+      }
+
+      async function executeDeactivation() {
+        closeDeactivateConfirm(); // Zamykamy modal z zapytaniem
+        
+        try {
+          // 1. Czyszczenie LocalStorage
+          localStorage.clear();
+
+          // 2. Czyszczenie bazy IndexedDB
+          if (window.indexedDB) {
+            const req = indexedDB.deleteDatabase("access-control");
+            req.onsuccess = () => console.log("Baza IndexedDB usunięta pomyślnie.");
+            req.onerror = () => console.error("Błąd usuwania IndexedDB.");
+            req.onblocked = () => console.warn("Usuwanie IndexedDB zablokowane (inna karta wciąż jej używa).");
+          }
+          
+          // 3. Wyrejestrowanie Service Workerów
+          if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (const registration of registrations) {
+              await registration.unregister();
+            }
+          }
+
+          // 4. Opcjonalne wyczyszczenie Cache API
+          if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            for (const cacheName of cacheNames) {
+              await caches.delete(cacheName);
+            }
+          }
+
+          // Zamiast domyślnego alert() używamy niestandardowego. 
+          // W 'callback' przekazujemy przekierowanie - wywoła się dopiero po kliknięciu "OK".
+          showCustomAlert("Sukces", "Aplikacja została poprawnie dezaktywowana.", () => {
+            window.location.replace("activate.html"); 
+          });
+
+        } catch (err) {
+          console.error("Błąd podczas dezaktywacji:", err);
+          showCustomAlert("Błąd", "Wystąpił błąd podczas dezaktywacji.");
+        }
+      }
+    </script>
+  
+</body></html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;" data-allow-browser=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Edycja danych</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/profiledata.css" as="style">
+    <link rel="preload" href="assets/fonts/roboto_400_latin.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/pages/profiledata.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <script src="js/guard.js" defer=""></script>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/header.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/pages/profiledata.js" defer=""></script>
+  <style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#121212"></head>
+  <body class="profiledata-page loaded">
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    <header class="app-header dowod-header">
+      <div class="header-left">
+        <a href="documents.html" class="back-link">
+          <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wróć">
+        </a>
+        <span class="header-title fade-in">Edycja danych</span>
+      </div>
+    </header>
+
+    <div class="container profiledata-card">
+      <div class="photo-container">
+        <img id="profileImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Zdjęcie profilowe" loading="eager" decoding="async" style="opacity: 0; transition: opacity 0.3s ease-in; cursor: pointer;" data-picker-bound="1" role="button" tabindex="0">
+        <p class="photo-hint" id="photoHint">Dotknij zdjęcia, aby je zmienić</p>
+        <input type="file" id="imageInput" accept="image/*">
+      </div>
+
+      <div class="tabs-container pd-tabs" role="tablist" aria-label="Typ dokumentu">
+        <button type="button" class="tab-button pd-tab tab-active" id="mdowod-tab" role="tab" aria-selected="true" onclick="switchTab('mdowod')">
+          mDowód
+        </button>
+        <button type="button" class="tab-button pd-tab" id="diia-tab" role="tab" aria-selected="false" onclick="switchTab('diia')">
+          DIIA.pl
+        </button>
+        <button type="button" class="tab-button pd-tab" id="legszk-tab" role="tab" aria-selected="false" onclick="switchTab('legszk')">
+          Leg. szkolna
+        </button>
+        <button type="button" class="tab-button pd-tab" id="legstu-tab" role="tab" aria-selected="false" onclick="switchTab('legstu')">
+          Leg. studencka
+        </button>
+        <button type="button" class="tab-button pd-tab" id="prawojazdy-tab" role="tab" aria-selected="false" onclick="switchTab('prawojazdy')">
+          Prawo jazdy
+        </button>
+      </div>
+
+      <div id="mdowod-content" style="display: block;">
+        <div class="pd-toolbar">
+          <button type="button" class="pd-btn pd-btn--fill" onclick="generateAllData()">
+            ✨ Wygeneruj wszystkie dane
+          </button>
+        </div>
+
+        <form id="passport-form">
+          <div class="form-group">
+            <label for="name">Imię (Imiona):</label>
+            <input type="text" id="name" name="name" placeholder="JAN" required="" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="surname">Nazwisko:</label>
+            <input type="text" id="surname" name="surname" placeholder="NOWAK" required="" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="nationality">Obywatelstwo:</label>
+            <input type="text" id="nationality" name="nationality" placeholder="POLSKIE" required="" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Data urodzenia:</label>
+            <input type="date" id="birthDate" name="birthDate" required="">
+          </div>
+          <div class="form-group">
+            <label for="pesel">PESEL:</label>
+            <div class="pd-field-row">
+              <input type="text" id="pesel" name="pesel" placeholder="00000000000" required="" oninput="convertToUpperCase(this)">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generatePesel()">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h2>Dane mDowodu</h2>
+          </div>
+          <div class="form-group">
+            <label for="idSeries">Seria i numer:</label>
+            <div class="pd-field-row pd-field-row--stack">
+              <input type="text" id="idSeries" name="idSeries" placeholder="XXXX00000" oninput="convertToUpperCase(this)">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generateMDowodNumber()">
+                🎲 Generuj
+              </button>
+            </div>
+            <label for="expiryDate">Termin ważności:</label>
+            <input type="date" id="expiryDate" name="expiryDate">
+          </div>
+          <div class="form-group">
+            <label for="issueDate">Data wydania:</label>
+            <input type="date" id="issueDate" name="issueDate">
+          </div>
+          <div class="form-group">
+            <h2>Dane dowodu osobistego</h2>
+          </div>
+          <div class="form-group">
+            <label for="idSeries_do">Seria i numer:</label>
+            <div class="pd-field-row">
+              <input type="text" id="idSeries_do" name="idSeries_do" placeholder="AAA000000" oninput="convertToUpperCase(this)">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generateDowodNumber()">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="issuingAuthority_do">Organ wydający:</label>
+            <input type="text" id="issuingAuthority_do" name="issuingAuthority_do" placeholder="np. PREZYDENT MIASTA WARSZAWY" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="expiryDate_do">Termin ważności:</label>
+            <input type="date" id="expiryDate_do" name="expiryDate_do">
+          </div>
+          <div class="form-group">
+            <label for="issueDate_do">Data wydania:</label>
+            <input type="date" id="issueDate_do" name="issueDate_do">
+          </div>
+
+          <div class="form-group">
+            <label for="fathername">Imię ojca:</label>
+            <input type="text" id="fathername" name="fathername" placeholder="JAN" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="mothername">Imię matki:</label>
+            <input type="text" id="mothername" name="mothername" placeholder="ANNA" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <h2>Twoje dodatkowe dane</h2>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Nazwisko rodowe:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="gender">Płeć:</label>
+            <select id="gender" name="gender">
+              <option value="">-- Wybierz płeć --</option>
+              <option value="MĘŻCZYZNA">MĘŻCZYZNA</option>
+              <option value="KOBIETA">KOBIETA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fatherSurname">Nazwisko rodowe ojca:</label>
+            <input type="text" id="fatherSurname" name="fatherSurname" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="motherSurname">Nazwisko rodowe matki:</label>
+            <input type="text" id="motherSurname" name="motherSurname" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group">
+            <label for="placeOfBirth">Miejsce urodzenia:</label>
+            <input type="text" id="placeOfBirth" name="placeOfBirth" placeholder="WARSZAWA" oninput="convertToUpperCase(this)">
+          </div>
+          <div class="form-group" id="zameldowanie">
+            <label>Adres zameldowania na pobyt stały:</label>
+            <div class="address-row">
+              <div class="address-col">
+                <label for="address">Adres</label>
+                <input type="text" id="address" name="address" placeholder="UL. PRZYKŁADOWA 00/00" oninput="convertToUpperCase(this)">
+              </div>
+              <div class="address-col">
+                <label for="postalcode">Kod pocztowy</label>
+                <input type="text" id="postalcode" name="postalcode" placeholder="00-000 WARSZAWA" oninput="convertToUpperCase(this)">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registrationDate">Data zameldowania na pobyt stały:</label>
+            <input type="date" id="registrationDate" name="registrationDate">
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="save-button" onclick="saveData()">
+              💾 Zapisz dane
+            </button>
+            <a href="more.html" class="back-button">⬅️ Powrót</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="diia-content" style="display: none">
+        <div class="pd-toolbar">
+          <button type="button" class="pd-btn pd-btn--fill" onclick="generateAllDataDiia()">
+            ✨ Wygeneruj wszystkie dane
+          </button>
+        </div>
+
+        <form id="diia-form">
+          <div class="form-group">
+            <h2>Dane DIIA.pl</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="name_diia">Imię (Imiona):</label>
+            <input type="text" id="name_diia" name="name_diia" placeholder="??????" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="surname_diia">Nazwisko:</label>
+            <input type="text" id="surname_diia" name="surname_diia" placeholder="????????" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="birthDate_diia">Data urodzenia:</label>
+            <input type="date" id="birthDate_diia" name="birthDate_diia">
+          </div>
+
+          <div class="form-group">
+            <label for="gender_diia">Płeć (do generowania):</label>
+            <select id="gender_diia" name="gender_diia">
+              <option value="">-- Wybierz płeć --</option>
+              <option value="MĘŻCZYZNA">MĘŻCZYZNA</option>
+              <option value="KOBIETA">KOBIETA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pesel_diia">PESEL:</label>
+            <div class="pd-field-row">
+              <input type="text" id="pesel_diia" name="pesel_diia" placeholder="00000000000" oninput="
+                  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)
+                ">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generatePeselDiia()" title="Generuj PESEL na podstawie daty urodzenia">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="placeOfBirth_diia">Miejsce urodzenia:</label>
+            <input type="text" id="placeOfBirth_diia" name="placeOfBirth_diia" placeholder="KIJÓW" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="countryOfOrigin_diia">Kraj pochodzenia:</label>
+            <input type="text" id="countryOfOrigin_diia" name="countryOfOrigin_diia" placeholder="UKRAINA" value="UKRAINA" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="nationality_diia">Obywatelstwo:</label>
+            <input type="text" id="nationality_diia" name="nationality_diia" placeholder="UKRAIŃSKIE" value="UKRAIŃSKIE" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="save-button" onclick="saveData()">
+              💾 Zapisz dane
+            </button>
+            <a href="more.html" class="back-button">⬅️ Powrót</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="legszk-content" style="display: none">
+        <div class="pd-toolbar">
+          <button type="button" class="pd-btn pd-btn--fill" onclick="generateAllDataLegszk()">
+            ✨ Wygeneruj wszystkie dane
+          </button>
+        </div>
+
+        <form id="legszk-form">
+          <div class="form-group">
+            <h2>Dane Legitymacji szkolnej</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="display-name_legszk">Imię (Imiona):</label>
+            <input type="text" id="display-name_legszk" data-target="display-name" placeholder="JAN" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-surname_legszk">Nazwisko:</label>
+            <input type="text" id="display-surname_legszk" data-target="display-surname" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-birthDate_legszk">Data urodzenia:</label>
+            <input type="date" id="display-birthDate_legszk" data-target="display-birthDate">
+          </div>
+
+          <div class="form-group">
+            <label for="gender_legszk">Płeć (do generowania):</label>
+            <select id="gender_legszk" name="gender_legszk">
+              <option value="">-- Wybierz płeć --</option>
+              <option value="MĘŻCZYZNA">MĘŻCZYZNA</option>
+              <option value="KOBIETA">KOBIETA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="display-pesel_legszk">PESEL:</label>
+            <div class="pd-field-row">
+              <input type="text" id="display-pesel_legszk" data-target="display-pesel" placeholder="00000000000" oninput="
+                  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)
+                ">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generatePeselLegszk()">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="display-cardNumber_legszk">Numer legitymacji:</label>
+            <input type="text" id="display-cardNumber_legszk" data-target="display-cardNumber" placeholder="1234/56" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-issueDate_legszk">Data wydania:</label>
+            <input type="date" id="display-issueDate_legszk" data-target="display-issueDate">
+          </div>
+
+          <div class="form-group">
+            <label for="display-expiryDate_legszk">Data ważności:</label>
+            <input type="date" id="display-expiryDate_legszk" data-target="display-expiryDate">
+          </div>
+
+          <div class="form-group">
+            <label for="display-schoolName_legszk">Nazwa szkoły:</label>
+            <input type="text" id="display-schoolName_legszk" data-target="display-schoolName" placeholder="SZKOŁA PODSTAWOWA NR 1 IM. JANA III SOBIESKIEGO" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-schoolAddress_legszk">Adres szkoły:</label>
+            <input type="text" id="display-schoolAddress_legszk" data-target="display-schoolAddress" placeholder="UL. SZKOLNA 1, 00-001 WARSZAWA" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-schoolPhone_legszk">Telefon szkoły:</label>
+            <input type="text" id="display-schoolPhone_legszk" data-target="display-schoolPhone" placeholder="22 123 45 67">
+          </div>
+
+          <div class="form-group">
+            <label for="display-schoolDirector_legszk">Dyrektor szkoły:</label>
+            <input type="text" id="display-schoolDirector_legszk" data-target="display-schoolDirector" placeholder="ANNA KOWALSKA" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="save-button" onclick="saveData()">
+              💾 Zapisz dane
+            </button>
+            <a href="more.html" class="back-button">⬅️ Powrót</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="legstu-content" style="display: none">
+        <div class="pd-toolbar">
+          <button type="button" class="pd-btn pd-btn--fill" onclick="generateAllDataLegstu()">
+            ✨ Wygeneruj wszystkie dane
+          </button>
+        </div>
+
+        <form id="legstu-form">
+          <div class="form-group">
+            <h2>Dane Legitymacji studenckiej</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="display-name_legstu">Imię (Imiona):</label>
+            <input type="text" id="display-name_legstu" data-target="display-name" placeholder="JAN" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-surname_legstu">Nazwisko:</label>
+            <input type="text" id="display-surname_legstu" data-target="display-surname" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-birthDate_legstu">Data urodzenia:</label>
+            <input type="date" id="display-birthDate_legstu" data-target="display-birthDate">
+          </div>
+
+          <div class="form-group">
+            <label for="gender_legstu">Płeć (do generowania):</label>
+            <select id="gender_legstu" name="gender_legstu">
+              <option value="">-- Wybierz płeć --</option>
+              <option value="MĘŻCZYZNA">MĘŻCZYZNA</option>
+              <option value="KOBIETA">KOBIETA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="display-pesel_legstu">PESEL:</label>
+            <div class="pd-field-row">
+              <input type="text" id="display-pesel_legstu" data-target="display-pesel" placeholder="00000000000" oninput="
+                  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)
+                ">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generatePeselLegstu()">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="display-dataWydania_legstu">Data wydania:</label>
+            <input type="date" id="display-dataWydania_legstu" data-target="display-dataWydania">
+          </div>
+
+          <div class="form-group">
+            <label for="display-uczelnia_legstu">Nazwa uczelni:</label>
+            <input type="text" id="display-uczelnia_legstu" data-target="display-uczelnia" placeholder="UNIWERSYTET WARSZAWSKI" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-albumNumber_legstu">Numer albumu:</label>
+            <input type="text" id="display-albumNumber_legstu" data-target="display-albumNumber" placeholder="123456" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="save-button" onclick="saveData()">
+              💾 Zapisz dane
+            </button>
+            <a href="more.html" class="back-button">⬅️ Powrót</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="prawojazdy-content" style="display: none">
+        <div class="pd-toolbar">
+          <button type="button" class="pd-btn pd-btn--fill" onclick="generateAllDataPrawojazdy()">
+            ✨ Wygeneruj wszystkie dane
+          </button>
+        </div>
+
+        <form id="prawojazdy-form">
+          <div class="form-group">
+            <h2>Dane Prawa jazdy</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="display-name_prawojazdy">Imię (Imiona):</label>
+            <input type="text" id="display-name_prawojazdy" data-target="display-name" placeholder="JAN" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-surname_prawojazdy">Nazwisko:</label>
+            <input type="text" id="display-surname_prawojazdy" data-target="display-surname" placeholder="NOWAK" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="display-birthDate_prawojazdy">Data urodzenia:</label>
+            <input type="date" id="display-birthDate_prawojazdy" data-target="display-birthDate">
+          </div>
+
+          <div class="form-group">
+            <label for="display-birthPlace_prawojazdy">Miejsce urodzenia:</label>
+            <input type="text" id="display-birthPlace_prawojazdy" data-target="display-birthPlace" placeholder="WARSZAWA" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="form-group">
+            <label for="gender_prawojazdy">Płeć (do generowania):</label>
+            <select id="gender_prawojazdy" name="gender_prawojazdy">
+              <option value="">-- Wybierz płeć --</option>
+              <option value="MĘŻCZYZNA">MĘŻCZYZNA</option>
+              <option value="KOBIETA">KOBIETA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="display-pesel_prawojazdy">PESEL:</label>
+            <div class="pd-field-row">
+              <input type="text" id="display-pesel_prawojazdy" data-target="display-pesel" placeholder="00000000000" oninput="
+                  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)
+                ">
+              <button type="button" class="pd-btn pd-btn--compact" onclick="generatePeselPrawojazdy()">
+                🎲 Generuj
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="display-issueDate_prawojazdy">Data wydania:</label>
+            <input type="date" id="display-issueDate_prawojazdy" data-target="display-issueDate">
+          </div>
+
+          <div class="form-group">
+            <label for="display-documentNumber_prawojazdy">Numer dokumentu:</label>
+            <input type="text" id="display-documentNumber_prawojazdy" data-target="display-documentNumber" placeholder="12345/67/8901">
+          </div>
+
+          <div class="form-group">
+            <label for="display-blanketNumber_prawojazdy">Numer blankietu:</label>
+            <input type="text" id="display-blanketNumber_prawojazdy" data-target="display-blanketNumber" placeholder="A12345678">
+          </div>
+
+          <div class="form-group">
+            <label for="display-issuingAuthority_prawojazdy">Organ wydający:</label>
+            <input type="text" id="display-issuingAuthority_prawojazdy" data-target="display-issuingAuthority" placeholder="STAROSTWO POWIATOWE W LUBLINIE" oninput="convertToUpperCase(this)">
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="save-button" onclick="saveData()">
+              💾 Zapisz dane
+            </button>
+            <a href="more.html" class="back-button">⬅️ Powrót</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("embed") !== "1") return;
+
+        document.documentElement.classList.add("profiledata-embed");
+
+        var guard = document.getElementById("jsGuard");
+        if (guard) {
+          guard.hidden = true;
+          guard.style.display = "none";
+        }
+
+        function bindPhotoPicker() {
+          var img = document.getElementById("profileImage");
+          var input = document.getElementById("imageInput");
+          var hint = document.getElementById("photoHint");
+          if (hint) hint.hidden = false;
+          if (!img || !input) return;
+          img.addEventListener("click", function () {
+            input.click();
+          });
+          img.setAttribute("role", "button");
+          img.setAttribute("tabindex", "0");
+          img.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              input.click();
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", bindPhotoPicker, {
+            once: true,
+          });
+        } else {
+          bindPhotoPicker();
+        }
+      })();
+    </script>
+  
+
+</body></html>

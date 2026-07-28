@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;" data-allow-browser=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    <title>sObywatel 4.0</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/diia.css" as="style">
+    <link rel="preload" href="assets/orzel/godlo%20back.png" as="image" type="image/png">
+    <link rel="preload" href="assets/orzel/godlo%20top.png" as="image" type="image/png">
+    <link rel="preload" href="assets/dowod/mid_background_main.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="assets/fonts/roboto_400_latinext.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="assets/fonts/roboto_500_latinext.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="assets/fonts/roboto_700_latinext.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/diia.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/overlay-camera.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <script src="js/guard.js"></script><style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/header.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/pages/diia.js" defer=""></script>
+  <meta name="color-scheme" content="light dark"></head>
+
+  <body class="loaded">
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    <header class="app-header dowod-header">
+      <div class="header-left">
+        <a href="documents.html" class="back-link">
+          <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wróć">
+        </a>
+        <span class="header-title fade-in">Diia.pl</span>
+      </div>
+    </header>
+
+    <p class="czas" aria-live="polite">Czas: 00:28:21 15.06.2026</p>
+
+    <main>
+      <section id="lew">
+        <div class="photo-container">
+          <img id="profileImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwADbQGgYgkQ7wAAAABJRU5ErkJggg==" class="photo" alt="Zdjęcie profilowe" loading="eager" decoding="async" style="opacity: 0; transition: opacity 0.3s ease-in; width: 332.5px; height: 429.516px;">
+          <img class="photo-border" src="assets/dowod/glowing.png" alt="" loading="eager">
+        </div>
+        <div id="gradient"></div>
+        <img src="assets/dowod/waving_ukrainian_flag.gif" alt="Flaga" id="flaga">
+        <div id="rzecz">
+          <div class="wrapper">
+            <div class="base-back" style="display: block; opacity: 1;"></div>
+            <div class="holo-back" style="opacity: 0.7; background-position: center 50%;"></div>
+            <div class="holo-grain"></div>
+            <div class="godlo-top" style="display: block; opacity: 1;"></div>
+          </div>
+          <p>Rzeczpospolita<br>Polska</p>
+        </div>
+      </section>
+      <section id="praw">
+        <div class="cwel">
+          <span class="title" id="display-name">Brak danych</span>
+          <span class="description">Imię (Imiona)</span>
+        </div>
+        <div class="cwel">
+          <span class="title" id="display-surname">Brak danych</span>
+          <span class="description">Nazwisko</span>
+        </div>
+        <div class="cwel">
+          <span class="title" id="display-birthDate">Brak danych</span>
+          <span class="description">Data urodzenia</span>
+        </div>
+        <div class="cwel">
+          <span class="title" id="display-pesel">Brak danych</span>
+          <span class="description">Numer PESEL</span>
+        </div>
+      </section>
+    </main>
+
+    <section id="bottom">
+      <svg class="status-checkmark" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+        <circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" stroke-width="1"></circle>
+        <g transform="translate(5,5)">
+          <path fill="currentColor" d="m9.24,18.53c-0.19,0 -0.38,-0.07 -0.53,-0.22l-5.43,-5.43c-0.29,-0.29 -0.29,-0.77 0,-1.06s0.77,-0.29 1.06,0l4.9,4.9 10.41,-10.41c0.29,-0.29 0.77,-0.29 1.06,0s0.29,0.77 0,1.06l-10.94,10.94c-0.15,0.15 -0.34,0.22 -0.53,0.22Z"></path>
+        </g>
+      </svg>
+      <p>Dokument ważny</p>
+    </section>
+
+    <section class="actions">
+      <div class="quick-actions">
+        <button class="qa-item" type="button" style="cursor: pointer;">
+          <span class="qa-icon"><img src="assets/icons/ai002_confirm_identity_mini.svg" alt="Potwierdź swoje dane"></span>
+          <span class="qa-label">Potwierdź<br>swoje dane</span>
+        </button>
+        <button class="qa-item" type="button">
+          <span class="qa-icon"><img src="assets/icons/ab023_zoom_in.svg" alt="Powiększ PESEL"></span>
+          <span class="qa-label">Powiększ<br>PESEL</span>
+        </button>
+        <button class="qa-item" type="button">
+          <span class="qa-icon"><img src="assets/icons/lock_pesel.svg" alt="Zastrzeż PESEL"></span>
+          <span class="qa-label">Zastrzeż<br>PESEL</span>
+        </button>
+        <button class="qa-item" type="button" style="cursor: pointer;">
+          <span class="qa-icon"><img src="assets/icons/ab011_more_vertical.svg" alt="Pozostałe skróty"></span>
+          <span class="qa-label">Pozostałe<br>skróty</span>
+        </button>
+      </div>
+    </section>
+
+    <p class="category-title" style="margin: 20px 20px 12px 20px; font-size: large; font-weight: 500">
+      Dodatkowe dane
+    </p>
+    <section class="details-card">
+      <div class="row">
+        <p class="info">Kraj pochodzenia</p>
+        <p class="main" id="countryOfOrigin">Brak danych</p>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <p class="info">Miejsce urodzenia</p>
+        <p class="main" id="placeOfBirth">Brak danych</p>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <p class="info">Obywatelstwo</p>
+        <p class="main" id="nationality">Brak danych</p>
+      </div>
+    </section>
+
+    <section>
+      <a class="list-card" style="
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          padding: 40px 20px;
+          border-radius: 10px;
+          background-color: white;
+        ">
+        <div>
+          <p class="info">Ostatnia aktualizacja</p>
+          <p id="sukadziwkakurwa" class="main">--.--.----</p>
+        </div>
+        <button id="aktualizuj">Aktualizuj</button>
+      </a>
+    </section>
+
+    <div id="notification" class="notification" role="status" aria-live="polite">
+      <span class="notification-text">Dokument został zaktualizowany</span>
+      <button type="button" class="notification-close" aria-label="Zamknij powiadomienie"></button>
+    </div>
+
+    <p class="disclaimer" style="margin-top: 16px"></p>
+
+    <section id="camera-container" class="camera-section" style="display: none">
+      <header class="app-header dowod-header">
+        <div class="header-left">
+          <a href="#" class="back-link" onclick="
+              closeCamera();
+              return false;
+            ">
+            <img class="back-icon" src="assets/icons/ab004_arrow_left.svg" alt="Wróć">
+          </a>
+          <span class="header-title fade-in">Zeskanuj kod QR</span>
+        </div>
+        <img class="help-icon" src="assets/dowod/znakzapytania.svg" alt="Pomoc">
+      </header>
+      <div class="camera-overlay-content">
+        <p class="camera-hint">Umieść kod QR w ramce, aby go zeskanować.</p>
+        <div class="camera-frame">
+          <div class="camera-viewport">
+            <video id="camera-view" class="camera-video" autoplay="" playsinline=""></video>
+            <img src="assets/icons/ic_scan_qr_frame.svg" alt="" class="qr-frame-overlay qr-frame-light">
+            <img src="assets/icons/ic_scan_qr_frame_dark.svg" alt="" class="qr-frame-overlay qr-frame-dark">
+          </div>
+        </div>
+        <button type="button" id="enter-code" class="camera-cta">
+          Wpisz kod
+        </button>
+      </div>
+    </section>
+
+    <section id="more-shortcuts-overlay" class="camera-section" style="display: none">
+      <header class="app-header dowod-header">
+        <div class="header-left">
+          <a href="#" class="back-link" onclick="
+              closeMoreShortcutsOverlay();
+              return false;
+            ">
+            <img class="back-icon" src="assets/icons/ab009_x_mark.svg" alt="Wróć">
+          </a>
+          <span class="header-title fade-in">Pozostałe skróty</span>
+        </div>
+      </header>
+      <div class="camera-overlay-content">
+        <section>
+          <div class="card-list">
+            <div class="card" id="delete-doc" role="button" tabindex="0">
+              <img src="assets/icons/aa002_delete.svg" alt="Usuń dokument" width="24" height="24" style="margin-right: 10px">
+              <span style="font-weight: 500; color: red">Usuń dokument</span>
+              <img src="assets/icons/ic_arrow_forward_gray.svg" alt="arrow" width="24" height="24">
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section style="
+        margin: 20px;
+        padding: 16px;
+        background: var(--blue-active-bg);
+        border-radius: 10px;
+      ">
+      <div style="display: flex; gap: 12px">
+        <svg style="
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            color: var(--blue-active);
+          " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          <text x="12" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">
+            i
+          </text>
+        </svg>
+        <div>
+          <p style="font-weight: 500; margin: 0 0 8px 0; color: var(--text)">
+            Informacja
+          </p>
+          <p style="
+              font-size: 0.8em;
+              color: var(--text);
+              margin: 0;
+              line-height: 1.5;
+            ">
+            Dokument wydany na podstawie ustawy z dnia 12 marca 2022 r. o pomocy
+            obywatelom Ukrainy w związku z konfliktem zbrojnym na terytorium
+            tego państwa (Dz.U. 2023 poz. 103), pozwala na potwierdzenie
+            tożsamości obywateli Ukrainy, których pobyt na terytorium Polski
+            jest uznany za legalny.
+          </p>
+          <a href="#" style="
+              color: var(--blue-active);
+              text-decoration: none;
+              font-weight: 500;
+              font-size: 0.9em;
+              margin-top: 8px;
+              display: inline-block;
+            ">Więcej informacji</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/orzel.js"></script>
+  
+
+</body></html>

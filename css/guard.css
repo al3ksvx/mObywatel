@@ -1,0 +1,572 @@
+:root {
+  --guard-overlay-bg:
+    radial-gradient(
+      900px 560px at 12% -8%,
+      rgba(255, 255, 255, 0.9),
+      transparent 62%
+    ),
+    radial-gradient(
+      720px 480px at 88% 0%,
+      rgba(203, 213, 225, 0.45),
+      transparent 58%
+    ),
+    linear-gradient(165deg, #f8f9fb 0%, #eef1f4 48%, #e5e7eb 100%);
+  --guard-overlay-text: #1f2937;
+  --guard-overlay-muted: #6b7280;
+  --guard-card-bg: rgba(255, 255, 255, 0.92);
+  --guard-card-text: #111827;
+  --guard-card-muted: #6b7280;
+  --guard-border: rgba(17, 24, 39, 0.1);
+  --guard-accent: #4b5563;
+  --guard-accent-soft: rgba(75, 85, 99, 0.1);
+  --guard-accent-border: rgba(75, 85, 99, 0.18);
+  --guard-accent-glow: rgba(17, 24, 39, 0.12);
+  --guard-btn-bg: linear-gradient(135deg, #52525b 0%, #27272a 100%);
+  --guard-btn-bg-hover: linear-gradient(135deg, #71717a 0%, #3f3f46 100%);
+  --guard-btn-text: #fafafa;
+  --guard-card-soft: rgba(249, 250, 251, 0.88);
+  --guard-section-bg: rgba(243, 244, 246, 0.72);
+  --guard-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
+}
+
+:root[data-theme="dark"] {
+  --guard-overlay-bg:
+    radial-gradient(
+      900px 620px at 10% -10%,
+      rgba(255, 255, 255, 0.04),
+      transparent 62%
+    ),
+    radial-gradient(
+      760px 520px at 90% 0%,
+      rgba(161, 161, 170, 0.08),
+      transparent 58%
+    ),
+    linear-gradient(165deg, #18181b 0%, #27272a 52%, #1f1f23 100%);
+  --guard-overlay-text: #f4f4f5;
+  --guard-overlay-muted: #a1a1aa;
+  --guard-card-bg: rgba(39, 39, 42, 0.88);
+  --guard-card-text: #fafafa;
+  --guard-card-muted: #a1a1aa;
+  --guard-border: rgba(255, 255, 255, 0.1);
+  --guard-accent: #d4d4d8;
+  --guard-accent-soft: rgba(255, 255, 255, 0.06);
+  --guard-accent-border: rgba(255, 255, 255, 0.12);
+  --guard-accent-glow: rgba(0, 0, 0, 0.28);
+  --guard-btn-bg: linear-gradient(135deg, #71717a 0%, #52525b 100%);
+  --guard-btn-bg-hover: linear-gradient(135deg, #a1a1aa 0%, #71717a 100%);
+  --guard-btn-text: #fafafa;
+  --guard-card-soft: rgba(24, 24, 27, 0.72);
+  --guard-section-bg: rgba(9, 9, 11, 0.42);
+  --guard-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto_400_latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto_500_latin.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto_700_latin.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body.guard-active {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.guard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding:
+    max(20px, env(safe-area-inset-top, 0px))
+    max(20px, env(safe-area-inset-right, 0px))
+    max(20px, env(safe-area-inset-bottom, 0px))
+    max(20px, env(safe-area-inset-left, 0px));
+  background: var(--guard-overlay-bg);
+  color: var(--guard-overlay-text);
+  font-family: "Roboto", "Segoe UI", Arial, sans-serif;
+  pointer-events: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.guard-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+  opacity: 0.22;
+}
+
+.guard-overlay:not([hidden]) {
+  display: flex !important;
+  pointer-events: all !important;
+  visibility: visible !important;
+}
+
+.guard-overlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.guard-card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  background: var(--guard-card-bg);
+  color: var(--guard-card-text);
+  border: 1px solid var(--guard-border);
+  border-radius: 24px;
+  padding: 28px 24px 24px;
+  text-align: center;
+  box-shadow: var(--guard-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: guard-card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes guard-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.guard-card h1,
+.guard-card h2 {
+  margin: 0;
+  color: inherit;
+}
+
+.guard-card p {
+  margin: 0;
+  color: var(--guard-card-muted);
+}
+
+.guard-theme-toggle {
+  position: fixed !important;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  padding: 10px 16px;
+  width: auto;
+  max-width: 220px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 999px;
+  border: 1px solid var(--guard-border);
+  background: var(--guard-card-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--guard-overlay-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 8px 20px var(--guard-accent-glow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.guard-theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px var(--guard-accent-glow);
+  border-color: var(--guard-accent-border);
+}
+
+.guard-content {
+  display: grid;
+  gap: 14px;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.guard-hero {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+
+.guard-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--guard-accent-border);
+  box-shadow:
+    0 14px 28px var(--guard-accent-glow),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  background: var(--guard-card-soft);
+}
+
+.guard-icon-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.guard-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--guard-accent);
+  background: var(--guard-accent-soft);
+  border: 1px solid var(--guard-accent-border);
+}
+
+.guard-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--guard-accent);
+  box-shadow: 0 0 0 3px var(--guard-accent-soft);
+}
+
+.guard-overlay.guard-fullscreen {
+  align-items: center;
+  justify-content: center;
+}
+
+.guard-overlay.guard-fullscreen .guard-card {
+  width: 100%;
+  min-height: auto;
+  height: auto;
+  max-width: 480px;
+  border-radius: 24px;
+  border: 1px solid var(--guard-border);
+  box-shadow: var(--guard-shadow);
+  background: var(--guard-card-bg);
+  color: var(--guard-card-text);
+  text-align: center;
+  padding: 28px 24px 24px;
+  margin-top: 0;
+}
+
+.guard-title {
+  font-size: clamp(1.45rem, 5vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.guard-text {
+  margin: 0 auto;
+  max-width: 34ch;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--guard-card-muted);
+}
+
+.guard-actions {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  margin-top: 4px;
+}
+
+.guard-install-btn {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid var(--guard-accent-border);
+  border-radius: 14px;
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--guard-btn-text);
+  background: var(--guard-btn-bg);
+  cursor: pointer;
+  box-shadow:
+    0 12px 24px var(--guard-accent-glow),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.guard-install-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--guard-btn-bg-hover);
+  box-shadow:
+    0 16px 30px var(--guard-accent-glow),
+    0 1px 0 rgba(255, 255, 255, 0.14) inset;
+}
+
+.guard-install-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.guard-install-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: none;
+  box-shadow: none;
+}
+
+.guard-install-btn-label {
+  display: inline-block;
+}
+
+.guard-install-message {
+  min-height: 20px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--guard-card-muted);
+}
+
+.guard-install-message.is-error {
+  color: #71717a;
+}
+
+:root[data-theme="dark"] .guard-install-message.is-error {
+  color: #d4d4d8;
+}
+
+.guard-help {
+  margin-top: 6px;
+  text-align: left;
+  border: 1px solid var(--guard-border);
+  border-radius: 16px;
+  background: var(--guard-section-bg);
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guard-help summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--guard-card-text);
+  list-style: none;
+  transition: background 0.2s ease;
+  min-width: 0;
+}
+
+.guard-help-summary-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.guard-help-expand {
+  color: var(--guard-card-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.guard-help[open] .guard-help-expand {
+  display: none;
+}
+
+.guard-help summary:hover {
+  background: var(--guard-accent-soft);
+}
+
+.guard-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.guard-help summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.guard-help[open] summary::after {
+  transform: rotate(225deg) translateY(1px);
+}
+
+.guard-help-lead {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--guard-card-muted);
+  border-top: 1px solid var(--guard-border);
+}
+
+.guard-columns {
+  display: grid;
+  gap: 12px;
+  padding: 0 12px 12px;
+  grid-template-columns: 1fr;
+}
+
+.guard-section {
+  border: 1px solid var(--guard-border);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--guard-card-soft);
+}
+
+.guard-platform {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--guard-accent);
+  background: var(--guard-accent-soft);
+  border: 1px solid var(--guard-accent-border);
+}
+
+.guard-section h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--guard-card-text);
+  font-weight: 600;
+}
+
+.guard-section ol {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--guard-card-muted);
+}
+
+.guard-section li {
+  margin-bottom: 6px;
+}
+
+.guard-section li:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .guard-overlay {
+    padding:
+      max(28px, env(safe-area-inset-top, 0px))
+      max(28px, env(safe-area-inset-right, 0px))
+      max(28px, env(safe-area-inset-bottom, 0px))
+      max(28px, env(safe-area-inset-left, 0px));
+  }
+
+  .guard-card,
+  .guard-overlay.guard-fullscreen .guard-card {
+    padding: 32px 28px 24px;
+  }
+
+  .guard-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.guard-overlay.guard-desktop-blocked {
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  background: #fff;
+}
+
+.guard-overlay.guard-desktop-blocked::before {
+  display: none;
+}
+
+.guard-overlay.guard-desktop-blocked .guard-card {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  color: #404040;
+  text-align: left;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guard-card {
+    animation: none;
+  }
+
+  .guard-install-btn,
+  .guard-theme-toggle,
+  .guard-help summary {
+    transition: none;
+  }
+}

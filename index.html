@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark; background-image: url(&quot;assets/icons/coi_common_ui_mobywatel_background_dark.webp&quot;) !important; background-position: center center !important; background-size: cover !important; background-repeat: no-repeat !important; --vh: 6px;" data-allow-browser=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#121212">
+    <title>sObywatel 4.0</title>
+    <script src="js/theme-init.js"></script>
+
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/pages/login.css" as="style">
+    <link rel="preload" href="assets/fonts/roboto_400_latin.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="assets/fonts/roboto_500_latin.woff2" as="font" type="font/woff2">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages/login.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/guard.css">
+
+    <script src="js/guard.js" defer=""></script>
+    <script src="js/theme.js" defer=""></script>
+    <script src="js/navigation.js" defer=""></script>
+    <script src="js/pages/login.js" defer=""></script>
+    <script src="js/header.js" async=""></script>
+  <style>* { -webkit-touch-callout: none !important; -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; } img { -webkit-user-drag: none !important; } input, textarea { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; }</style><meta name="color-scheme" content="light dark"></head>
+
+  <body class="loaded" style="background-image: url(&quot;assets/icons/coi_common_ui_mobywatel_background_dark.webp&quot;) !important; background-position: center center !important; background-size: cover !important; background-repeat: no-repeat !important;">
+    <div id="customAlertOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
+      <div style="background: #ffffff; width: 90%; max-width: 340px; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center;">
+        <h3 id="customAlertTitle" style="margin: 0 0 12px 0; font-size: 18px; color: #111827; font-weight: 600;">Uwaga</h3>
+        <p id="customAlertMessage" style="margin: 0 0 24px 0; font-size: 14px; color: #4b5563; line-height: 1.5;"></p>
+        <button id="customAlertCloseBtn" style="width: 100%; padding: 12px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 500; font-size: 16px; cursor: pointer; transition: background 0.2s;">
+          Rozumiem
+        </button>
+      </div>
+    </div>
+
+    <div id="jsGuard" class="guard-overlay" role="status" aria-live="polite" hidden="" style="display: none;">
+      <div class="guard-card"></div>
+    </div>
+    
+    <div class="login" style="display: flex; flex-direction: column; min-height: 100vh;">
+      <header class="login__header">
+        <div id="logoToPasswordBtn" class="login__logo-group" style="cursor: pointer; -webkit-tap-highlight-color: transparent;">
+          <img src="assets/icons/mobywatel_logo_horizontal.svg" alt="mObywatel" class="login__logo-image app-logo">
+        </div>
+        <div class="login__intro">
+          <h1 class="login__title">Dobry wieczór!</h1>
+          <p class="login__subtitle">Zaloguj się do aplikacji.</p>
+        </div>
+      </header>
+
+      <main class="login__main" style="display: flex; flex-direction: column; flex-grow: 1; position: relative; padding-bottom: 0;">
+        
+        <div id="passwordView" style="display: none; width: 100%;">
+          <form id="loginForm" class="login__form">
+            <label class="login__password-label" for="passwordInput">Hasło</label>
+            <div class="login__password">
+              <input id="passwordInput" type="password" class="login__password-input" autocomplete="current-password">
+              <button type="button" class="login__eye" aria-label="Pokaż hasło">
+                <img src="assets/icons/show_password.svg" alt="Pokaż hasło">
+              </button>
+            </div>
+            <div id="passwordError" class="login__error" aria-live="polite" style="
+                display: none;
+                color: #b91c1c;
+                margin: 1px 0 -2px 0;
+                font-size: 13px;
+              "></div>
+            <a class="login__forgot" href="#">Nie pamiętasz hasła?</a>
+          </form>
+        </div>
+
+        <div id="biometricView" style="display: flex; flex-grow: 1; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+          <div id="biometricTapArea" style="cursor: pointer; padding: 20px; transition: opacity 0.2s; display: flex; flex-direction: column; align-items: center;">
+            
+            <img src="assets/icons/fingerprint.svg" alt="Odcisk palca" style="width: 80px; height: 80px; display: block; margin: 0 auto; object-fit: contain; filter: invert(32%) sepia(99%) saturate(3029%) hue-rotate(211deg) brightness(101%) contrast(101%); pointer-events: none;">
+            
+            <p style="margin-top: 16px; color: #9ca3af; font-size: 15px; text-align: center;">Dotknij, aby zalogować się biometrią</p>
+          </div>
+        </div>
+
+        <div id="bottomButtonsContainer" style="width: 100%; margin: auto 0 12px 0; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box;">
+          
+          <button id="submitPasswordBtn" type="submit" form="loginForm" style="display: none; width: 100%; padding: 14px; background-color: #2563eb; color: #ffffff; border: none; border-radius: 12px; font-weight: 500; font-size: 16px; cursor: pointer; box-sizing: border-box;">
+            Zaloguj się
+          </button>
+
+          <button id="switchToBiometricBtn" type="button" style="display: none; width: 100%; padding: 14px; border: 2px solid #2563eb; color: #2563eb; background-color: transparent; border-radius: 12px; font-weight: 500; font-size: 16px; cursor: pointer; box-sizing: border-box;">
+            Logowanie biometrią
+          </button>
+
+          <button id="switchToPasswordBtn" type="button" style="display: block; width: 100%; padding: 14px; border: 2px solid rgb(37, 99, 235); color: rgb(37, 99, 235); background-color: transparent; border-radius: 12px; font-weight: 500; font-size: 16px; cursor: pointer; box-sizing: border-box;">
+            Wpisz hasło
+          </button>
+        </div>
+
+      </main>
+
+      <footer class="login__footer">
+        <div class="login__footerImages">
+          <img src="assets/icons/kpo_logo.svg" alt="KPO" class="login__footerLogo">
+          <img src="assets/icons/rp_logo.svg" alt="RP" class="login__footerLogo">
+          <img src="assets/icons/nextgeneu_logo.svg" alt="NextGenerationEU" class="login__footerLogo">
+          <span class="login__footerDivider" aria-hidden="true"></span>
+          <img src="assets/icons/mc_logo.svg" alt="MC" class="login__footerLogo">
+        </div>
+        <p class="login__version">wersja 4.82.1 (6126)</p>
+      </footer>
+    </div>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0bcc441ed32f53c',t:'MTc4MTQ3NjA5MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; visibility: hidden;"></iframe>
+</body></html>

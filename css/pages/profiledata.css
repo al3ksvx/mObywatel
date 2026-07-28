@@ -1,0 +1,518 @@
+/* Edycja danych — profiledata.html + panel /dane w asystencie (2 motywy) */
+
+body.profiledata-page,
+.dane-sheet-host {
+  --pd-accent: var(--blue-active, #165ef8);
+  --pd-accent-2: #5b7cfa;
+  --pd-accent-soft: var(--blue-active-bg, #e5ecfd);
+  --pd-radius-sm: 10px;
+  --pd-radius: 14px;
+  --pd-radius-lg: 18px;
+  --pd-shadow: 0 4px 24px rgba(19, 20, 25, 0.06);
+  --pd-tabs-bg: rgba(0, 0, 0, 0.04);
+  --pd-tab-inactive: var(--text-muted);
+  --pd-input-bg: var(--surface);
+  --pd-section-line: var(--border);
+}
+
+[data-theme="dark"] body.profiledata-page,
+[data-theme="dark"] .dane-sheet-host {
+  --pd-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --pd-tabs-bg: rgba(255, 255, 255, 0.06);
+  --pd-tab-inactive: rgba(255, 255, 255, 0.55);
+  --pd-input-bg: #161a20;
+  --pd-section-line: #2f3540;
+}
+
+body.profiledata-page {
+  font-family: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: max(env(safe-area-inset-bottom), 20px);
+}
+
+body.profiledata-page header h1 {
+  text-align: center;
+  font-size: 1.7em;
+  margin-bottom: 1.5em;
+  color: var(--text);
+  padding-top: 10px;
+}
+
+body.profiledata-page .profiledata-card,
+.dane-sheet-host .container {
+  width: min(100% - 24px, 32rem);
+  background: var(--surface);
+  border-radius: var(--pd-radius-lg);
+  box-shadow: var(--pd-shadow);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.15rem 1.75rem;
+  margin: calc(70px + env(safe-area-inset-top, 0px)) auto 1.5rem;
+  box-sizing: border-box;
+}
+
+.dane-sheet-host .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.5rem 0 1.5rem;
+}
+
+/* Zdjęcie profilowe */
+body.profiledata-page .photo-container,
+.dane-sheet-host .photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0 1.25rem;
+  padding: 1rem 0 0.25rem;
+}
+
+body.profiledata-page #profileImage,
+.dane-sheet-host #profileImage {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--surface);
+  outline: 3px solid var(--pd-accent-soft);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.65rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] body.profiledata-page #profileImage,
+[data-theme="dark"] .dane-sheet-host #profileImage {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+html.profiledata-embed #profileImage:active,
+.dane-sheet-host #profileImage:active {
+  transform: scale(0.98);
+}
+
+html.profiledata-embed .photo-hint,
+.dane-sheet-host .photo-hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Zakładki dokumentów */
+.pd-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 1.25rem;
+  padding: 5px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: var(--pd-tabs-bg);
+  border-radius: var(--pd-radius);
+  border: 1px solid var(--border);
+}
+
+.pd-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.pd-tab {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--pd-radius-sm);
+  background: transparent;
+  color: var(--pd-tab-inactive);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pd-tab:hover:not(.tab-active) {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .pd-tab:hover:not(.tab-active) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pd-tab.tab-active {
+  color: #fff;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--pd-accent) 0%, var(--pd-accent-2) 100%);
+  box-shadow: 0 2px 10px rgba(22, 94, 248, 0.35);
+}
+
+[data-theme="dark"] .pd-tab.tab-active {
+  box-shadow: 0 2px 14px rgba(75, 165, 255, 0.25);
+}
+
+/* Pasek akcji (generuj wszystko) */
+.pd-toolbar {
+  margin: 0 0 1.25rem;
+  text-align: center;
+}
+
+/* Przyciski */
+.pd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.pd-btn:active {
+  transform: scale(0.98);
+}
+
+.pd-btn--fill {
+  width: 100%;
+  max-width: 20rem;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 0.9375rem;
+  color: #fff;
+  border-radius: var(--pd-radius);
+  background: linear-gradient(135deg, var(--pd-accent) 0%, var(--pd-accent-2) 100%);
+  box-shadow: 0 4px 14px rgba(22, 94, 248, 0.28);
+}
+
+[data-theme="dark"] .pd-btn--fill {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.pd-btn--compact {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pd-accent);
+  background: var(--pd-accent-soft);
+  border-radius: var(--pd-radius-sm);
+  border: 1px solid transparent;
+}
+
+.pd-btn--compact:hover {
+  filter: brightness(0.97);
+}
+
+[data-theme="dark"] .pd-btn--compact {
+  color: var(--pd-accent);
+  border-color: rgba(75, 165, 255, 0.2);
+}
+
+.pd-field-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.pd-field-row > input[type="text"],
+.pd-field-row > input:not([type]) {
+  flex: 1;
+  min-width: 0;
+}
+
+.pd-field-row--stack {
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+
+/* Formularz */
+body.profiledata-page form,
+.dane-sheet-host form {
+  display: flex;
+  flex-direction: column;
+}
+
+body.profiledata-page .form-group,
+.dane-sheet-host .form-group {
+  margin-bottom: 1.35rem;
+  display: flex;
+  flex-direction: column;
+}
+
+body.profiledata-page .form-group h2,
+.dane-sheet-host .form-group h2 {
+  margin: 0.5rem 0 0.25rem;
+  padding: 0 0 0 12px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  border-left: 3px solid var(--pd-accent);
+  line-height: 1.35;
+}
+
+body.profiledata-page label,
+.dane-sheet-host label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-bottom: 0.45rem;
+  display: block;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+body.profiledata-page input,
+.dane-sheet-host input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--pd-radius-sm);
+  background-color: var(--pd-input-bg);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+body.profiledata-page .form-group select,
+.dane-sheet-host .form-group select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--pd-radius-sm);
+  background-color: var(--pd-input-bg);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+  box-sizing: border-box;
+  color: var(--text);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 2.5rem;
+}
+
+[data-theme="dark"] body.profiledata-page .form-group select,
+[data-theme="dark"] .dane-sheet-host .form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23aaa' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+body.profiledata-page input:focus,
+body.profiledata-page .form-group select:focus,
+.dane-sheet-host input:focus,
+.dane-sheet-host .form-group select:focus {
+  border-color: var(--pd-accent);
+  background-color: var(--pd-accent-soft);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(22, 94, 248, 0.12);
+}
+
+[data-theme="dark"] body.profiledata-page input:focus,
+[data-theme="dark"] body.profiledata-page .form-group select:focus,
+[data-theme="dark"] .dane-sheet-host input:focus,
+[data-theme="dark"] .dane-sheet-host .form-group select:focus {
+  box-shadow: 0 0 0 3px rgba(75, 165, 255, 0.15);
+}
+
+body.profiledata-page input::placeholder,
+.dane-sheet-host input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.65;
+}
+
+body.profiledata-page .address-row,
+.dane-sheet-host .address-row {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: 1em;
+  align-items: end;
+}
+
+body.profiledata-page .address-col label,
+.dane-sheet-host .address-col label {
+  font-size: 0.75rem;
+}
+
+/* Stopka formularza */
+body.profiledata-page .buttons,
+.dane-sheet-host .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+body.profiledata-page .save-button,
+body.profiledata-page .back-button,
+.dane-sheet-host .save-button,
+.dane-sheet-host .back-button {
+  flex: 1 1 140px;
+  min-height: 48px;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--pd-radius);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body.profiledata-page .save-button,
+.dane-sheet-host .save-button {
+  background: linear-gradient(135deg, var(--pd-accent) 0%, var(--pd-accent-2) 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(22, 94, 248, 0.25);
+}
+
+body.profiledata-page .back-button,
+.dane-sheet-host .back-button {
+  background: var(--pd-tabs-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] body.profiledata-page .back-button,
+[data-theme="dark"] .dane-sheet-host .back-button {
+  background: #252a32;
+  border-color: #3a404c;
+}
+
+body.profiledata-page .save-button:active,
+body.profiledata-page .back-button:active,
+.dane-sheet-host .save-button:active,
+.dane-sheet-host .back-button:active {
+  transform: scale(0.98);
+}
+
+/* Ukryty input pliku */
+html.profiledata-embed #imageInput,
+.dane-sheet-host #imageInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+html.profiledata-embed #profileImage,
+.dane-sheet-host #profileImage {
+  cursor: pointer;
+}
+
+/* Tryb embed (asystent /dane) */
+html.profiledata-embed #jsGuard,
+html.profiledata-embed .app-header,
+html.profiledata-embed .back-button {
+  display: none !important;
+}
+
+html.profiledata-embed body.profiledata-page {
+  align-items: stretch;
+  padding-top: max(env(safe-area-inset-top), 8px);
+}
+
+html.profiledata-embed .profiledata-card,
+html.profiledata-embed .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.75rem 0 1.5rem;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.dane-sheet-host .back-button {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  body.profiledata-page .profiledata-card,
+  .dane-sheet-host .container {
+    width: min(100% - 16px, 32rem);
+    padding: 1rem 0.9rem 1.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  body.profiledata-page input[type="text"],
+  body.profiledata-page input[type="date"],
+  body.profiledata-page select,
+  .dane-sheet-host input[type="text"],
+  .dane-sheet-host input[type="date"],
+  .dane-sheet-host select {
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 520px) {
+  body.profiledata-page .address-row,
+  .dane-sheet-host .address-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-tab {
+    font-size: 0.75rem;
+    padding: 8px 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-btn,
+  .pd-tab,
+  body.profiledata-page #profileImage,
+  .dane-sheet-host #profileImage {
+    transition: none;
+  }
+}

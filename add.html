@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="pl" data-theme="dark" style="color-scheme: dark;"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Wybierz dokumenty</title>
+<script src="js/theme-init.js"></script>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preload" href="css/common.css" as="style">
+<link rel="preload" href="css/pages/documents-add.css" as="style">
+<link rel="preload" href="js/pages/documents-add.js" as="script">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/pages/documents-add.css">
+<script src="js/theme.js" defer=""></script>
+<script src="js/navigation.js" defer=""></script>
+<script src="js/pages/documents-add.js" defer=""></script>
+<meta name="color-scheme" content="light dark"><meta name="theme-color" content="#121212"></head>
+<body class="add-page loaded">
+<div class="add_document_list">
+    <div class="add-doc-topbar">
+        <a href="documents.html" class="add-doc-back" data-button="add_document_list_back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+            Wróć
+        </a>
+        <h1 class="add-doc-topbar-title">Wybierz dokumenty</h1>
+        <div class="add-doc-topbar-spacer" aria-hidden="true"></div>
+    </div>
+    <div class="add-doc-body">
+        <div class="add-doc-search-wrap">
+            <svg class="add-doc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3-3"></path></svg>
+            <input class="add-doc-search" placeholder="Szukaj" type="text">
+        </div>
+        <p class="add-doc-hint">Zaznacz, które dokumenty chcesz dodać.</p>
+        <div class="add-doc-card">
+            <label class="add-doc-option" data-document-add="mdowod">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">mDowód</span>
+            </label>
+            <label class="add-doc-option" data-document-add="mdowod2">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Moje pojazdy</span>
+            </label>
+            <label class="add-doc-option" data-document-add="mdowod3">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Legitymacja osoby niepełnosprawnej</span>
+            </label>
+            <label class="add-doc-option" data-document-add="mdowod4">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Legitymacja radcy prawnego</span>
+            </label>
+            <label class="add-doc-option" data-document-add="diia">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Diia.pl</span>
+            </label>
+            <label class="add-doc-option" data-document-add="school_id">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Legitymacja szkolna</span>
+            </label>
+            <label class="add-doc-option" data-document-add="student_id">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">Legitymacja studencka</span>
+            </label>
+            <label class="add-doc-option" data-document-add="mprawojazdy">
+                <input type="checkbox" class="add-doc-option__input">
+                <span class="add-doc-option__box" aria-hidden="true"></span>
+                <span class="add-doc-option__label">mPrawo jazdy</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+
+</body></html>
